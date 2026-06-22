@@ -18,6 +18,7 @@
   #imgPreview img{width:100%;display:block;border-radius:10px;border:1px solid rgba(255,255,255,0.14);box-shadow:0 24px 70px rgba(0,0,0,0.65)}
   @media(max-width:560px){.work-thumb{width:76px;height:54px}}
   @media(max-width:1099px){#imgPreview{display:none}}
+  @media(max-width:768px){.chrome-hud{display:none}}
 </style>
 </head>
 <body>
@@ -30,8 +31,8 @@
   </div>
 
   <!-- ====== FIXED CHROME ====== -->
-  <div style="position:fixed;right:30px;top:24px;z-index:5;font-size:11px;font-weight:700;letter-spacing:0.12em;color:#5b8cff;pointer-events:none">⟲ DRAG ANYWHERE TO PLAY</div>
-  <div style="position:fixed;left:30px;bottom:26px;width:320px;max-width:46vw;z-index:5;pointer-events:none;font-size:11px;font-weight:700;letter-spacing:0.12em">
+  <div class="chrome-hud" style="position:fixed;right:30px;top:24px;z-index:5;font-size:11px;font-weight:700;letter-spacing:0.12em;color:#5b8cff;pointer-events:none">⟲ DRAG ANYWHERE TO PLAY</div>
+  <div class="chrome-hud" style="position:fixed;left:30px;bottom:26px;width:320px;max-width:46vw;z-index:5;pointer-events:none;font-size:11px;font-weight:700;letter-spacing:0.12em">
     <div style="display:flex;gap:16px;margin-bottom:12px">
       <span id="m0" style="color:#5b8cff">TUBE</span>
       <span id="m1" style="color:#3a4150">PARTICLES</span>
