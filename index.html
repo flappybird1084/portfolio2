@@ -33,13 +33,13 @@
   <!-- ====== FIXED CHROME ====== -->
   <div class="chrome-hud" style="position:fixed;right:30px;top:24px;z-index:5;font-size:11px;font-weight:700;letter-spacing:0.12em;color:#5b8cff;pointer-events:none">⟲ DRAG ANYWHERE TO PLAY</div>
   <div class="chrome-hud" style="position:fixed;left:30px;bottom:26px;width:320px;max-width:46vw;z-index:5;pointer-events:none;font-size:11px;font-weight:700;letter-spacing:0.12em">
-    <div style="display:flex;gap:16px;margin-bottom:12px">
+    <div style="display:flex;justify-content:space-between;margin-bottom:12px">
       <span id="m0" style="color:#5b8cff">TUBE</span>
       <span id="m1" style="color:#3a4150">PARTICLES</span>
       <span id="m2" style="color:#3a4150">BRAILLE</span>
       <span id="m3" style="color:#3a4150">ASCII</span>
     </div>
-    <div style="height:3px;background:#171a20;border-radius:2px;overflow:hidden"><div id="meterFill" style="height:100%;width:0%;background:#3f78ff;transition:width .12s linear"></div></div>
+    <div style="height:3px;background:#171a20;border-radius:2px;overflow:hidden"><div id="meterFill" style="height:100%;width:0%;background:#3f78ff;transition:width .5s cubic-bezier(.4,0,.2,1)"></div></div>
     <div style="display:flex;justify-content:space-between;margin-top:10px;color:#5a6470;font-weight:400"><span>angular velocity</span><span id="omegaVal">0.006</span></div>
   </div>
 
@@ -182,6 +182,7 @@ class KnotScene {
     this.spin = 0.006; this.energy = 0.006; this.rx = 0.5; this.ry = 0.4; this.idleBase = 0.006;
     // position-based scroll rotation: ry tracks (scroll position × gear), eased per-frame
     this.scrollGear = 0.0032; this.scrollAngleSmooth = (window.scrollY || window.pageYOffset || 0) * this.scrollGear;
+    this.stateSmooth = 0; // smoothed average glyph state (0..3) that the HUD slider follows
     this.dragging = false; this.px = 0; this.py = 0; this.dragV = 0;
     this.canvas = document.getElementById('knotCanvas');
     this.panel = document.getElementById('knotPanel');
@@ -316,10 +317,13 @@ class KnotScene {
     // decays in step with the glyphs (one step/sec) instead of snapping down with the velocity.
     if ((this.fc++ % 5) === 0) {
       let sum = 0; for (let i = 0; i < N; i++) sum += this.style[i];
-      const avg = sum / N;                       // mean glyph state, 0 (tube) .. 3 (ascii)
-      const idx = Math.round(avg);
+      const avg = sum / N;                                   // mean glyph state, 0 (tube) .. 3 (ascii)
+      this.stateSmooth += (avg - this.stateSmooth) * 0.25;   // smooth out per-frame glyph churn
+      // snap to the nearest state name, biased toward tube so the idle resting field (~0.2 avg,
+      // where a few glyphs flicker to particles) stays pinned at TUBE instead of reading PARTICLES
+      const idx = this.stateSmooth < 0.55 ? 0 : Math.min(3, Math.round(this.stateSmooth));
       for (let k = 0; k < 4; k++) this.hud.m[k].style.color = k === idx ? this.col(1, 1) : '#3a4150';
-      this.hud.meter.style.width = (avg / 3 * 100).toFixed(0) + '%';
+      this.hud.meter.style.width = (idx / 3 * 100) + '%';    // slide the bar to that name (CSS-eased)
       this.hud.meter.style.background = this.col(1, 1);
       this.hud.om.textContent = this.spin.toFixed(3);
     }
