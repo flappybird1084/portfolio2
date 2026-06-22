@@ -180,6 +180,8 @@ class KnotScene {
     this.light = new Array(N).fill(0); // per-segment lightness (accent -> white), set with style
 
     this.spin = 0.006; this.energy = 0.006; this.rx = 0.5; this.ry = 0.4; this.idleBase = 0.006;
+    // position-based scroll rotation: ry tracks (scroll position × gear), eased per-frame
+    this.scrollGear = 0.0032; this.scrollAngleSmooth = (window.scrollY || window.pageYOffset || 0) * this.scrollGear;
     this.dragging = false; this.px = 0; this.py = 0; this.dragV = 0;
     this.canvas = document.getElementById('knotCanvas');
     this.panel = document.getElementById('knotPanel');
@@ -193,18 +195,10 @@ class KnotScene {
       const dy = y - this.lastScroll; this.lastScroll = y;
       const force = (this.props.scrollForce ?? 1);
       const add = (dy > 0 ? Math.abs(dy)*0.0013 : Math.abs(dy)*0.0007) * force;
-      // scroll feeds the "predicted velocity" (energy) that drives the tube→particle→…→ascii transition
+      // scroll feeds only the "predicted velocity" (energy) that drives the tube→particle→…→ascii
+      // transition. Rotation itself is position-based (see frame()): ry tracks scroll position, so
+      // scrolling down winds the knot forward and scrolling up unwinds it, 1:1 with distance.
       this.energy = Math.min(0.30, this.energy + add);
-      // …and eases rotation toward a fixed, signed cap. Scrolling down spins forward up to a cap;
-      // scrolling up reverses (negative velocity) toward a *lower* cap with *gentler* acceleration.
-      // It reaches the cap quickly but never exceeds it, regardless of how fast you scroll. Only
-      // pushes toward the cap in the scroll direction, so a faster drag-flick can still spin past it.
-      const fwd = dy > 0;
-      const SCROLL_SPIN_MAX = 0.34 / 5;          // forward (scroll down) cap (~1/5 of the flick max)
-      const target = fwd ? SCROLL_SPIN_MAX : -SCROLL_SPIN_MAX * 0.5;  // reverse cap is lower
-      const accel = fwd ? 0.5 : 0.28;            // reverse accelerates more slowly
-      if (fwd) { if (this.spin < target) this.spin = Math.min(target, this.spin + (target - this.spin) * accel); }
-      else     { if (this.spin > target) this.spin = Math.max(target, this.spin + (target - this.spin) * accel); }
     };
     window.addEventListener('scroll', this._onScroll, { passive: true });
 
@@ -243,10 +237,15 @@ class KnotScene {
 
     // energy (degradation intensity) always relaxes toward idle
     this.energy = idle + (this.energy - idle) * 0.945; if (this.energy < idle) this.energy = idle;
-    // rotation speed relaxes toward idle (from either side, so reverse spin eases back up through
-    // zero to the forward idle); applied to the angles only when not being dragged
-    this.spin = idle + (this.spin - idle) * 0.945;
-    if (!this.dragging) { this.ry += this.spin; this.rx += this.spin * 0.12; }
+    // idle/flick rotation velocity relaxes toward idle (forward); applied only when not dragging
+    this.spin = idle + (this.spin - idle) * 0.945; if (this.spin < idle) this.spin = idle;
+    // position-based scroll rotation: ease a smoothed angle toward (scroll position × gear) and apply
+    // its per-frame delta, so total rotation tracks scroll distance (down winds forward, up unwinds)
+    const scrollTarget = (window.scrollY || window.pageYOffset || 0) * this.scrollGear;
+    const prevScroll = this.scrollAngleSmooth;
+    this.scrollAngleSmooth += (scrollTarget - this.scrollAngleSmooth) * 0.18;
+    const scrollDelta = this.scrollAngleSmooth - prevScroll;
+    if (!this.dragging) { this.ry += this.spin + scrollDelta; this.rx += (this.spin + scrollDelta) * 0.12; }
 
     // intensity -> position on resolution axis (0 tube .. 3 ascii)
     const t = Math.max(0, Math.min(1, (this.energy - idle) / (0.14 - idle)));
