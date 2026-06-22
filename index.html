@@ -50,16 +50,6 @@
 
   <!-- ====== FIXED CHROME ====== -->
   <div class="chrome-hud" style="position:fixed;right:30px;top:24px;z-index:5;font-size:11px;font-weight:700;letter-spacing:0.12em;color:#5b8cff;pointer-events:none">⟲ DRAG ANYWHERE TO PLAY</div>
-  <div class="chrome-hud" style="position:fixed;left:30px;bottom:26px;width:320px;max-width:46vw;z-index:5;pointer-events:none;font-size:11px;font-weight:700;letter-spacing:0.12em">
-    <div style="display:flex;justify-content:space-between;margin-bottom:12px">
-      <span id="m0" style="color:#5b8cff">TUBE</span>
-      <span id="m1" style="color:#3a4150">PARTICLES</span>
-      <span id="m2" style="color:#3a4150">BRAILLE</span>
-      <span id="m3" style="color:#3a4150">ASCII</span>
-    </div>
-    <div style="height:3px;background:#171a20;border-radius:2px;overflow:hidden"><div id="meterFill" style="height:100%;width:0%;background:#3f78ff;transition:width .5s cubic-bezier(.4,0,.2,1)"></div></div>
-    <div style="display:flex;justify-content:space-between;margin-top:10px;color:#5a6470;font-weight:400"><span>angular velocity</span><span id="omegaVal">0.006</span></div>
-  </div>
 
   <!-- ====== HOVER PREVIEW (enlarged project image, fixed in the left margin) ====== -->
   <div id="imgPreview" aria-hidden="true"><img id="imgPreviewImg" src="" alt=""></div>
@@ -103,7 +93,7 @@
       <section style="background:rgba(8,10,14,0.55);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,0.06);border-radius:3px;padding:42px 44px;margin-bottom:26px">
         <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:30px"><div style="font-size:12px;font-weight:700;letter-spacing:0.2em;color:#5b8cff">02 · SELECTED WORK</div><div style="font-size:11px;color:#5a6470">// from github</div></div>
         <div style="display:flex;flex-direction:column">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.07);transition:transform .2s" onmouseover="this.style.transform='translateX(10px)';this.querySelector('.t').style.color='#5b8cff'" onmouseout="this.style.transform='translateX(0)';this.querySelector('.t').style.color='#f4f6fb'"><span class="work-thumb"><img src="img/otter-agent.png" alt="OtterAgent brain-map interface with an agent chat panel" loading="lazy"></span><div style="flex:1"><a href="https://github.com/flappybird1084/otter-agent" target="_blank" rel="noopener" class="t" style="pointer-events:auto;text-decoration:none;display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:23px;color:#f4f6fb;transition:color .2s">OtterAgent <span style="font-size:11px;color:#5b8cff;letter-spacing:0.08em">★ BEST AI HACK</span></a><div style="font-size:13px;color:#a7afba;margin-top:6px">A social network for AI agents that coordinate on your behalf, managing calendars, notes, and tasks under user-defined permission scopes. Best AI Hack at Synthesis Hacks @ Google, built with Avinash Senthil, Tyler Cruz, and Hunter Li.</div><a href="https://devpost.com/software/otterbox-h1fbi7" target="_blank" rel="noopener" style="pointer-events:auto;display:inline-block;margin-top:12px;font-size:11px;font-weight:700;letter-spacing:0.1em;color:#5b8cff;text-decoration:none" onmouseover="this.style.color='#8fb0ff'" onmouseout="this.style.color='#5b8cff'">DEVPOST ↗</a></div><div style="font-size:12px;color:#5a6470;font-weight:700;white-space:nowrap">FastAPI · Gemini</div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.07);transition:transform .2s" onmouseover="this.style.transform='translateX(10px)';this.querySelector('.t').style.color='#5b8cff'" onmouseout="this.style.transform='translateX(0)';this.querySelector('.t').style.color='#f4f6fb'"><span class="work-thumb"><img src="img/otter-agent.png" alt="OtterAgent brain-map interface with an agent chat panel" loading="lazy"></span><div style="flex:1"><a href="https://github.com/flappybird1084/otter-agent" target="_blank" rel="noopener" class="t" style="pointer-events:auto;text-decoration:none;display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:23px;color:#f4f6fb;transition:color .2s">OtterAgent <span style="font-size:11px;color:#5b8cff;letter-spacing:0.08em">★ BEST AI HACK</span></a><div style="font-size:13px;color:#a7afba;margin-top:6px">A social network for AI agents that coordinate on your behalf, managing calendars, notes, and tasks under user-defined permission scopes. Best AI Hack at Synthesis Hacks @ Google.</div><a href="https://devpost.com/software/otterbox-h1fbi7" target="_blank" rel="noopener" style="pointer-events:auto;display:inline-block;margin-top:12px;font-size:11px;font-weight:700;letter-spacing:0.1em;color:#5b8cff;text-decoration:none" onmouseover="this.style.color='#8fb0ff'" onmouseout="this.style.color='#5b8cff'">DEVPOST ↗</a></div><div style="font-size:12px;color:#5a6470;font-weight:700;white-space:nowrap">FastAPI · Gemini</div></div>
           <a href="https://github.com/flappybird1084/parameter-golf" target="_blank" rel="noopener" style="pointer-events:auto;text-decoration:none;color:inherit;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.07)" onmouseover="this.style.transform='translateX(10px)';this.querySelector('.t').style.color='#5b8cff'" onmouseout="this.style.transform='translateX(0)';this.querySelector('.t').style.color='#f4f6fb'"><span class="work-thumb"><img src="img/golf.jpg" alt="Parameter Golf training log: 600s wallclock, int8+zlib 9.6MB artifact, sliding-window BPB ~1.51" loading="lazy"></span><div style="flex:1"><div class="t" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:23px;color:#f4f6fb;transition:color .2s">OpenAI Parameter Golf</div><div style="font-size:13px;color:#a7afba;margin-top:6px">My entry to OpenAI's Model Craft Challenge: a 16MB language model trained in a 600s window, tuned to 1.5126 BPB on a single A5000 via a Muon warmup fix, int8-QAT weight snapping, and sliding-window eval.</div></div><div style="font-size:12px;color:#5a6470;font-weight:700;white-space:nowrap">PyTorch</div></a>
           <a href="https://github.com/flappybird1084/vesta" target="_blank" rel="noopener" style="pointer-events:auto;text-decoration:none;color:inherit;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.07)" onmouseover="this.style.transform='translateX(10px)';this.querySelector('.t').style.color='#5b8cff'" onmouseout="this.style.transform='translateX(0)';this.querySelector('.t').style.color='#f4f6fb'"><span class="work-thumb"><img src="img/vesta.png" alt="Vesta recordings library with AI threat scores" loading="lazy"></span><div style="flex:1"><div class="t" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:23px;color:#f4f6fb;transition:color .2s">Vesta, surveillance engine</div><div style="font-size:13px;color:#a7afba;margin-top:6px">YOLO person detection, autonomous recording, and VLM threat scoring with natural-language clip search.</div></div><div style="font-size:12px;color:#5a6470;font-weight:700;white-space:nowrap">Flask · YOLO</div></a>
           <div style="display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.07);transition:transform .2s" onmouseover="this.style.transform='translateX(10px)';this.querySelector('.t').style.color='#5b8cff'" onmouseout="this.style.transform='translateX(0)';this.querySelector('.t').style.color='#f4f6fb'"><span class="work-thumb"><img src="img/sdv5-demo.webp" alt="Snowy mountain landscape generated by the latent diffusion model" loading="lazy"></span><div style="flex:1"><a href="https://github.com/flappybird1084/sd-v5" target="_blank" rel="noopener" class="t" style="pointer-events:auto;text-decoration:none;display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:23px;color:#f4f6fb;transition:color .2s">Latent diffusion from scratch</a><div style="font-size:13px;color:#a7afba;margin-top:6px">Rectified-flow latent diffusion, MMDiT-style, built from the paper up with a sharded data pipeline.</div><a href="https://huggingface.co/spaces/flappybird1084/sd-v5" target="_blank" rel="noopener" style="pointer-events:auto;display:inline-block;margin-top:12px;font-size:11px;font-weight:700;letter-spacing:0.1em;color:#5b8cff;text-decoration:none" onmouseover="this.style.color='#8fb0ff'" onmouseout="this.style.color='#5b8cff'">▶ LIVE DEMO ↗</a></div><div style="font-size:12px;color:#5a6470;font-weight:700;white-space:nowrap">PyTorch</div></div>
@@ -216,13 +206,10 @@ class KnotScene {
     this.spin = 0.006; this.energy = 0.006; this.rx = 0.5; this.ry = 0.4; this.idleBase = 0.006;
     // position-based scroll rotation: ry tracks (scroll position × gear), eased per-frame
     this.scrollGear = 0.0032; this.scrollAngleSmooth = (window.scrollY || window.pageYOffset || 0) * this.scrollGear;
-    this.stateSmooth = 0; // smoothed average glyph state (0..3) that the HUD slider follows
     this.dragging = false; this.px = 0; this.py = 0; this.dragV = 0;
     this.canvas = document.getElementById('knotCanvas');
     this.panel = document.getElementById('knotPanel');
     this.ctx = this.canvas.getContext('2d');
-    this.hud = { m: [0,1,2,3].map(k => document.getElementById('m'+k)), meter: document.getElementById('meterFill'), om: document.getElementById('omegaVal') };
-    this.fc = 0;
 
     this.lastScroll = window.scrollY || window.pageYOffset || 0;
     this._onScroll = () => {
@@ -348,21 +335,6 @@ class KnotScene {
       }
     }
 
-    // HUD (throttled): meter + active label track the ACTUAL average glyph state (0..3), not the
-    // instantaneous energy, so when velocity drops but glyphs are still ascii/braille the slider
-    // decays in step with the glyphs (one step/sec) instead of snapping down with the velocity.
-    if ((this.fc++ % 5) === 0) {
-      let sum = 0; for (let i = 0; i < N; i++) sum += this.style[i];
-      const avg = sum / N;                                   // mean glyph state, 0 (tube) .. 3 (ascii)
-      this.stateSmooth += (avg - this.stateSmooth) * 0.25;   // smooth out per-frame glyph churn
-      // snap to the nearest state name, biased toward tube so the idle resting field (~0.2 avg,
-      // where a few glyphs flicker to particles) stays pinned at TUBE instead of reading PARTICLES
-      const idx = this.stateSmooth < 0.55 ? 0 : Math.min(3, Math.round(this.stateSmooth));
-      for (let k = 0; k < 4; k++) this.hud.m[k].style.color = k === idx ? this.col(1, 1) : '#3a4150';
-      this.hud.meter.style.width = (idx / 3 * 100) + '%';    // slide the bar to that name (CSS-eased)
-      this.hud.meter.style.background = this.col(1, 1);
-      this.hud.om.textContent = this.spin.toFixed(3);
-    }
   }
 }
 
