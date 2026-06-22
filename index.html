@@ -200,7 +200,7 @@ class KnotScene {
       // It reaches the cap quickly but never exceeds it, regardless of how fast you scroll. Only
       // pushes toward the cap in the scroll direction, so a faster drag-flick can still spin past it.
       const fwd = dy > 0;
-      const SCROLL_SPIN_MAX = 0.34 / 3;          // forward (scroll down) cap
+      const SCROLL_SPIN_MAX = 0.34 / 5;          // forward (scroll down) cap (~1/5 of the flick max)
       const target = fwd ? SCROLL_SPIN_MAX : -SCROLL_SPIN_MAX * 0.5;  // reverse cap is lower
       const accel = fwd ? 0.5 : 0.28;            // reverse accelerates more slowly
       if (fwd) { if (this.spin < target) this.spin = Math.min(target, this.spin + (target - this.spin) * accel); }
