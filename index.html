@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Name — ML / Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#07080a}
+  ::selection{background:#2f6bff;color:#fff}
+</style>
+</head>
+<body>
+
+<div style="position:relative;background:#07080a;color:#eef1f8;font-family:'JetBrains Mono',monospace;min-height:100vh;overflow-x:hidden">
+
+  <!-- ====== KNOT BACKDROP (also the drag surface) ====== -->
+  <div id="knotPanel" style="position:fixed;inset:0;z-index:0;overflow:hidden;background:#07080a">
+    <canvas id="knotCanvas" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
+  </div>
+
+  <!-- ====== FIXED CHROME ====== -->
+  <div style="position:fixed;right:30px;top:24px;z-index:5;font-size:11px;font-weight:700;letter-spacing:0.12em;color:#5b8cff;pointer-events:none">⟲ DRAG ANYWHERE TO PLAY</div>
+  <div style="position:fixed;left:30px;bottom:26px;width:320px;max-width:46vw;z-index:5;pointer-events:none;font-size:11px;font-weight:700;letter-spacing:0.12em">
+    <div style="display:flex;gap:16px;margin-bottom:12px">
+      <span id="m0" style="color:#5b8cff">TUBE</span>
+      <span id="m1" style="color:#3a4150">PARTICLES</span>
+      <span id="m2" style="color:#3a4150">BRAILLE</span>
+      <span id="m3" style="color:#3a4150">ASCII</span>
+    </div>
+    <div style="height:3px;background:#171a20;border-radius:2px;overflow:hidden"><div id="meterFill" style="height:100%;width:0%;background:#3f78ff;transition:width .12s linear"></div></div>
+    <div style="display:flex;justify-content:space-between;margin-top:10px;color:#5a6470;font-weight:400"><span>angular velocity</span><span id="omegaVal">0.006</span></div>
+  </div>
+
+  <!-- ====== CONTENT (floats over the knot; pointer-events pass through so the whole page is draggable) ====== -->
+  <div style="position:relative;z-index:2;pointer-events:none">
+    <div style="max-width:680px;margin:0 auto;padding:0 32px 16vh">
+
+      <!-- HERO -->
+      <section style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 0 48px;text-shadow:0 2px 26px rgba(4,5,7,0.92),0 0 6px rgba(4,5,7,0.85)">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.24em;color:#5b8cff">MACHINE LEARNING · SOFTWARE ENGINEER</div>
+        <h1 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(62px,11.5vw,156px);line-height:0.86;letter-spacing:-0.035em;color:#f4f6fb;margin:26px 0 0">YOUR<br>NAME</h1>
+        <p style="font-size:15px;line-height:1.75;color:#c4cbd6;max-width:440px;margin:32px 0 0">Extensive experience building machine-learning systems end to end — from the model to the infrastructure that ships it. I care about the parts that are hard to see.</p>
+        <div style="margin-top:46px;display:flex;align-items:center;gap:12px;font-size:12px;color:#7c8590;font-weight:700;letter-spacing:0.12em">SCROLL TO SPIN IT UP <span style="color:#5b8cff">↓</span></div>
+      </section>
+
+      <!-- FOCUS -->
+      <section style="background:rgba(8,10,14,0.55);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,0.06);border-radius:3px;padding:42px 44px;margin-bottom:26px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.2em;color:#5b8cff;margin-bottom:34px">01 — FOCUS</div>
+        <div style="display:flex;flex-direction:column;gap:26px">
+          <div style="display:flex;gap:18px;align-items:baseline"><div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;color:#f4f6fb;min-width:42px">01</div><div><div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:21px;color:#eef1f8">Machine learning</div><div style="font-size:14px;line-height:1.7;color:#a7afba;margin-top:6px">Training, evaluation, and the unglamorous pipeline work that makes models actually reliable.</div></div></div>
+          <div style="display:flex;gap:18px;align-items:baseline"><div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;color:#f4f6fb;min-width:42px">02</div><div><div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:21px;color:#eef1f8">Systems &amp; infrastructure</div><div style="font-size:14px;line-height:1.7;color:#a7afba;margin-top:6px">Low-latency services, distributed compute, and the glue that holds a stack together under load.</div></div></div>
+          <div style="display:flex;gap:18px;align-items:baseline"><div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;color:#f4f6fb;min-width:42px">03</div><div><div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:21px;color:#eef1f8">Graphics, for fun</div><div style="font-size:14px;line-height:1.7;color:#a7afba;margin-top:6px">Real-time rendering and ASCII experiments — like the one woven behind this page.</div></div></div>
+        </div>
+      </section>
+
+      <!-- SELECTED WORK -->
+      <section style="background:rgba(8,10,14,0.55);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,0.06);border-radius:3px;padding:42px 44px;margin-bottom:26px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:30px"><div style="font-size:12px;font-weight:700;letter-spacing:0.2em;color:#5b8cff">02 — SELECTED WORK</div><div style="font-size:11px;color:#5a6470">// placeholder</div></div>
+        <div style="display:flex;flex-direction:column">
+          <a href="#" style="pointer-events:auto;text-decoration:none;color:inherit;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.07)" onmouseover="this.style.paddingLeft='10px';this.querySelector('.t').style.color='#5b8cff'" onmouseout="this.style.paddingLeft='0';this.querySelector('.t').style.color='#f4f6fb'"><div><div class="t" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:23px;color:#f4f6fb;transition:color .2s">Distributed training pipeline</div><div style="font-size:13px;color:#a7afba;margin-top:6px">Cut model iteration time roughly 4×.</div></div><div style="font-size:12px;color:#5a6470;font-weight:700">2025</div></a>
+          <a href="#" style="pointer-events:auto;text-decoration:none;color:inherit;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.07)" onmouseover="this.style.paddingLeft='10px';this.querySelector('.t').style.color='#5b8cff'" onmouseout="this.style.paddingLeft='0';this.querySelector('.t').style.color='#f4f6fb'"><div><div class="t" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:23px;color:#f4f6fb;transition:color .2s">Real-time inference engine</div><div style="font-size:13px;color:#a7afba;margin-top:6px">Sub-10ms serving at production scale.</div></div><div style="font-size:12px;color:#5a6470;font-weight:700">2024</div></a>
+          <a href="#" style="pointer-events:auto;text-decoration:none;color:inherit;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.07)" onmouseover="this.style.paddingLeft='10px';this.querySelector('.t').style.color='#5b8cff'" onmouseout="this.style.paddingLeft='0';this.querySelector('.t').style.color='#f4f6fb'"><div><div class="t" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:23px;color:#f4f6fb;transition:color .2s">ASCII 3D renderer</div><div style="font-size:13px;color:#a7afba;margin-top:6px">A weekend that got out of hand.</div></div><div style="font-size:12px;color:#5a6470;font-weight:700">2023</div></a>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section style="background:rgba(8,10,14,0.55);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,0.06);border-radius:3px;padding:42px 44px;margin-bottom:26px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.2em;color:#5b8cff;margin-bottom:26px">03 — ABOUT</div>
+        <p style="font-family:'Archivo',sans-serif;font-weight:500;font-size:clamp(21px,2.6vw,29px);line-height:1.34;letter-spacing:-0.01em;color:#dfe4ec;margin:0">I've spent years shipping ML in production — the kind of work where the model is the easy part. Lately I'm most interested in the seam between research and systems.</p>
+      </section>
+
+      <!-- CONTACT -->
+      <section style="background:rgba(8,10,14,0.55);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,0.06);border-radius:3px;padding:46px 44px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.2em;color:#5b8cff;margin-bottom:22px">04 — GET IN TOUCH</div>
+        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(32px,5vw,58px);line-height:0.95;letter-spacing:-0.03em;color:#f4f6fb">you@email.com</div>
+        <div style="display:flex;gap:26px;margin-top:28px;font-size:13px;font-weight:700">
+          <a href="https://github.com/flappybird1084" target="_blank" rel="noopener" style="pointer-events:auto;color:#a7afba;text-decoration:none" onmouseover="this.style.color='#5b8cff'" onmouseout="this.style.color='#a7afba'">GITHUB</a>
+          <a href="#" style="pointer-events:auto;color:#a7afba;text-decoration:none" onmouseover="this.style.color='#5b8cff'" onmouseout="this.style.color='#a7afba'">SCHOLAR</a>
+          <a href="https://www.linkedin.com/in/rianbutala" target="_blank" rel="noopener" style="pointer-events:auto;color:#a7afba;text-decoration:none" onmouseover="this.style.color='#5b8cff'" onmouseout="this.style.color='#a7afba'">LINKEDIN</a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ===== Props (baked from the Claude Design component defaults) =====
+const PROPS = {
+  accent: '#2f6bff',
+  scrollForce: 1,
+  idleSpin: 1,
+  trails: true,
+};
+
+class KnotScene {
+  constructor(props) { this.props = props; }
+
+  rotU(p, rx, ry) {
+    let x = p[0], y = p[1], z = p[2];
+    const cx = Math.cos(rx), sx = Math.sin(rx);
+    let y1 = y*cx - z*sx, z1 = y*sx + z*cx; y = y1; z = z1;
+    const cy = Math.cos(ry), sy = Math.sin(ry);
+    let x1 = x*cy + z*sy, z2 = -x*sy + z*cy; x = x1; z = z2;
+    return [x, y, z];
+  }
+  gauss(mu, s) { let u = Math.random() || 1e-9, v = Math.random(); return mu + s*Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+  hexToRgb(h) { h = (h || '#2f6bff').replace('#', ''); if (h.length === 3) h = h.split('').map(c => c+c).join(''); return [parseInt(h.slice(0,2),16)||47, parseInt(h.slice(2,4),16)||107, parseInt(h.slice(4,6),16)||255]; }
+  pickGlyph(s) { const B = ['⠿','⣿','⠾','⡿','⢾','⠷','⣷','⠟']; const A = ['#','%','@','*','+','=','&','$']; const set = s === 2 ? B : A; return set[(Math.random()*set.length)|0]; }
+  col(dn, a) { const m = Math.min(1, dn*0.6); const r = Math.round(this.ar+(235-this.ar)*m), g = Math.round(this.ag+(242-this.ag)*m), b = Math.round(this.ab+(255-this.ab)*m); return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')'; }
+  colL(L, a) { const r = Math.round(this.ar+(Math.min(255,this.ar+95)-this.ar)*L), g = Math.round(this.ag+(Math.min(255,this.ag+85)-this.ag)*L), b = Math.round(this.ab+(255-this.ab)*L); return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')'; }
+
+  mount() {
+    // geometry: (2,3) torus knot
+    const N = 240; this.N = N; const pts = [];
+    for (let i = 0; i < N; i++) { const t = i/N*2*Math.PI; const rr = 2 + Math.cos(3*t); pts.push([rr*Math.cos(2*t), rr*Math.sin(2*t), -Math.sin(3*t)]); }
+    let mx = 0; for (const v of pts) mx = Math.max(mx, Math.hypot(v[0], v[1], v[2]));
+    this.knot = pts.map(v => [v[0]/mx, v[1]/mx, v[2]/mx]);
+    this.style = new Array(N).fill(0);
+    this.glyph = new Array(N).fill('#');
+    this.lastChange = new Array(N).fill(0); // per-segment timestamp of last style switch
+    this.light = new Array(N).fill(0); // per-segment lightness (accent -> white), set with style
+
+    this.spin = 0.006; this.energy = 0.006; this.rx = 0.5; this.ry = 0.4; this.idleBase = 0.006;
+    this.dragging = false; this.px = 0; this.py = 0; this.dragV = 0;
+    this.canvas = document.getElementById('knotCanvas');
+    this.panel = document.getElementById('knotPanel');
+    this.ctx = this.canvas.getContext('2d');
+    this.hud = { m: [0,1,2,3].map(k => document.getElementById('m'+k)), meter: document.getElementById('meterFill'), om: document.getElementById('omegaVal') };
+    this.fc = 0;
+
+    this.lastScroll = window.scrollY || window.pageYOffset || 0;
+    this._onScroll = () => {
+      const y = window.scrollY || window.pageYOffset || 0;
+      const dy = y - this.lastScroll; this.lastScroll = y;
+      const force = (this.props.scrollForce ?? 1);
+      const add = (dy > 0 ? Math.abs(dy)*0.0013 : Math.abs(dy)*0.0007) * force;
+      this.spin = Math.min(0.13, this.spin + add * 0.4);
+      this.energy = Math.min(0.30, this.energy + add);
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+
+    // drag to rotate (whole page) — coasts at ~1/3 the speed scroll produces, but reaches the
+    // same degradation (energy is fed directly), so the speed needed per state is 1/3.
+    const panel = this.panel; panel.style.cursor = 'grab'; panel.style.touchAction = 'none';
+    panel.addEventListener('pointerdown', e => { this.dragging = true; panel.style.cursor = 'grabbing'; this.px = e.clientX; this.py = e.clientY; this.dragV = 0; if (panel.setPointerCapture) try { panel.setPointerCapture(e.pointerId); } catch (_) {} });
+    panel.addEventListener('pointermove', e => {
+      if (!this.dragging) return;
+      const dx = e.clientX - this.px, dy = e.clientY - this.py; this.px = e.clientX; this.py = e.clientY;
+      this.ry += dx * 0.01; this.rx += dy * 0.01;
+      const m = Math.hypot(dx, dy) * 0.01;
+      this.dragV = this.dragV * 0.6 + m * 0.4;
+      this.energy = Math.min(0.30, this.energy + m * 0.9);
+    });
+    const release = () => { if (this.dragging) { this.dragging = false; panel.style.cursor = 'grab'; this.spin = Math.min(0.34, this.dragV / 3); } };
+    panel.addEventListener('pointerup', release); window.addEventListener('pointerup', release);
+
+    this.resize();
+    this._loop = () => { this.frame(); this._raf = requestAnimationFrame(this._loop); };
+    this._loop();
+  }
+
+  resize() {
+    const w = this.panel.clientWidth, h = this.panel.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+    if (this.canvas.width !== Math.round(w*dpr) || this.canvas.height !== Math.round(h*dpr)) { this.canvas.width = w*dpr; this.canvas.height = h*dpr; this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    this.cw = w; this.ch = h;
+  }
+
+  frame() {
+    this.resize();
+    const ctx = this.ctx, w = this.cw, h = this.ch, N = this.N;
+    [this.ar, this.ag, this.ab] = this.hexToRgb(this.props.accent ?? '#2f6bff');
+    const idle = this.idleBase * (this.props.idleSpin ?? 1);
+    const trails = this.props.trails ?? true;
+
+    // energy (degradation intensity) always relaxes toward idle
+    this.energy = idle + (this.energy - idle) * 0.945; if (this.energy < idle) this.energy = idle;
+    // rotation speed relaxes toward idle; applied to the angles only when not being dragged
+    this.spin = idle + (this.spin - idle) * 0.945; if (this.spin < idle) this.spin = idle;
+    if (!this.dragging) { this.ry += this.spin; this.rx += this.spin * 0.12; }
+
+    // intensity -> position on resolution axis (0 tube .. 3 ascii)
+    const t = Math.max(0, Math.min(1, (this.energy - idle) / (0.14 - idle)));
+    const mu = t * 3;
+
+    // probabilistic bit-swapping along the chain — bell curve around mu (sigma fixed at 0.7
+    // so each state's distribution is unchanged), churn scales with intensity
+    const rate = Math.min(0.6, 0.05 + 5 * this.energy);
+    const now = performance.now();
+    for (let i = 0; i < N; i++) {
+      if (now - this.lastChange[i] < 1000) continue; // each state is held ≥ 1s before it may change again
+      const cur = this.style[i];
+      let target = Math.round(this.gauss(mu, 0.7));
+      if (target < 0) target = 0; if (target > 3) target = 3;
+      let ns = cur;
+      if (target > cur) { if (Math.random() < rate) ns = target; } // climb directly toward ascii — easy to hit
+      else if (target < cur) { ns = cur - 1; }                     // recover one step at a time (1s each: ascii→braille→particles→tube)
+      if (ns !== cur) {
+        this.style[i] = ns; this.lastChange[i] = now;
+        this.light[i] = Math.max(0, Math.min(1, ns/3*0.85 + Math.random()*0.30 - 0.05)); // lighter the higher the state, with jitter
+        if (ns >= 2) this.glyph[i] = this.pickGlyph(ns);
+      }
+    }
+
+    // background / motion trails (lighter trail the faster it spins — kept subtle so glyphs stay crisp)
+    if (trails) { ctx.fillStyle = 'rgba(6,7,9,' + (0.6 + (1 - t) * 0.4).toFixed(3) + ')'; ctx.fillRect(0, 0, w, h); }
+    else { ctx.clearRect(0, 0, w, h); }
+
+    // project (knot centered in the viewport, behind the content)
+    const S = Math.min(w, h) * 0.40, rx = this.rx, ry = this.ry;
+    const P = new Array(N);
+    for (let i = 0; i < N; i++) { const r = this.rotU(this.knot[i], rx, ry); const f = 5 / (5 - r[2]); P[i] = [w/2 + r[0]*f*S, h/2 + r[1]*f*S, r[2]]; }
+
+    // build depth-sorted draw list
+    const items = [];
+    for (let i = 0; i < N; i++) {
+      const st = this.style[i];
+      if (st === 0) { const j = (i+1)%N; items.push({ st: 0, i, j, z: (P[i][2]+P[j][2])/2 }); }
+      else items.push({ st, i, z: P[i][2] });
+    }
+    items.sort((a, b) => a.z - b.z);
+
+    ctx.lineCap = 'round'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (const it of items) {
+      const p = P[it.i], dn = (p[2] + 1) / 2, L = this.light[it.i];
+      if (it.st === 0) {
+        const q = P[it.j];
+        ctx.shadowColor = this.colL(L, 0.9); ctx.shadowBlur = 7;
+        ctx.strokeStyle = this.colL(L, 0.4 + 0.55*dn); ctx.lineWidth = 1.2 + 5.2*dn;
+        ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); ctx.stroke();
+        ctx.shadowBlur = 0;
+      } else if (it.st === 1) {
+        ctx.fillStyle = this.colL(L, 0.34 + 0.62*dn);
+        ctx.beginPath(); ctx.arc(p[0], p[1], 0.8 + 2.6*dn, 0, 6.283); ctx.fill();
+      } else if (it.st === 2) {
+        ctx.fillStyle = this.colL(L, 0.45 + 0.55*dn);
+        ctx.font = 'bold ' + (9 + 6*dn).toFixed(1) + "px 'JetBrains Mono', monospace";
+        ctx.fillText(this.glyph[it.i], p[0], p[1]);
+      } else {
+        ctx.fillStyle = this.colL(L, 0.55 + 0.45*dn);
+        ctx.font = '700 ' + (12 + 10*dn).toFixed(1) + "px 'JetBrains Mono', monospace";
+        ctx.fillText(this.glyph[it.i], p[0], p[1]);
+      }
+    }
+
+    // HUD (throttled)
+    if ((this.fc++ % 5) === 0) {
+      const idx = Math.round(mu);
+      for (let k = 0; k < 4; k++) this.hud.m[k].style.color = k === idx ? this.col(1, 1) : '#3a4150';
+      this.hud.meter.style.width = (t * 100).toFixed(0) + '%';
+      this.hud.meter.style.background = this.col(1, 1);
+      this.hud.om.textContent = this.spin.toFixed(3);
+    }
+  }
+}
+
+new KnotScene(PROPS).mount();
+</script>
+</body>
+</html>
