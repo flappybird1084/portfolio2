@@ -193,7 +193,9 @@ class KnotScene {
       const dy = y - this.lastScroll; this.lastScroll = y;
       const force = (this.props.scrollForce ?? 1);
       const add = (dy > 0 ? Math.abs(dy)*0.0013 : Math.abs(dy)*0.0007) * force;
-      this.spin = Math.min(0.13, this.spin + add * 0.4);
+      // scroll feeds only the "predicted velocity" (energy) that drives the tube→particle→…→ascii
+      // transition; it no longer touches this.spin, so the knot keeps a constant idle rotation
+      // and only a drag-flick (pointerup) changes its actual speed.
       this.energy = Math.min(0.30, this.energy + add);
     };
     window.addEventListener('scroll', this._onScroll, { passive: true });
