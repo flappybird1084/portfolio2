@@ -231,8 +231,8 @@ class KnotScene {
 
     // drag to rotate (whole page), coasts at ~1/3 the speed scroll produces, but reaches the
     // same degradation (energy is fed directly), so the speed needed per state is 1/3.
-    const panel = this.panel; panel.style.cursor = 'grab'; panel.style.touchAction = 'none';
-    panel.addEventListener('pointerdown', e => { this.dragging = true; panel.style.cursor = 'grabbing'; this.px = e.clientX; this.py = e.clientY; this.dragV = 0; if (panel.setPointerCapture) try { panel.setPointerCapture(e.pointerId); } catch (_) {} });
+    const panel = this.panel; panel.style.cursor = 'grab'; panel.style.touchAction = 'pan-y';
+    panel.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') return; this.dragging = true; panel.style.cursor = 'grabbing'; this.px = e.clientX; this.py = e.clientY; this.dragV = 0; if (panel.setPointerCapture) try { panel.setPointerCapture(e.pointerId); } catch (_) {} });
     panel.addEventListener('pointermove', e => {
       if (!this.dragging) return;
       const dx = e.clientX - this.px, dy = e.clientY - this.py; this.px = e.clientX; this.py = e.clientY;
