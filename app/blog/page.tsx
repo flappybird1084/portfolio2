@@ -17,7 +17,6 @@ export default function Blog() {
   return (
     <main className="max-w-content mx-auto px-8 pb-[16vh]">
       <PageHeading
-        label="07 · WRITING"
         title="Blog"
         description="Notes that don't fit in a README: the bugs that took a week, the ideas that didn't pan out, and the occasional one that did."
       />

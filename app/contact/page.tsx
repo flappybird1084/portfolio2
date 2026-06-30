@@ -13,7 +13,6 @@ export default function Contact() {
   return (
     <main className="max-w-content mx-auto px-8 pb-[16vh]">
       <PageHeading
-        label="06 · GET IN TOUCH"
         title="Contact"
         description="Open to internship and research opportunities. The fastest way to reach me is email."
       />

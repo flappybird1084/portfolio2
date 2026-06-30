@@ -15,7 +15,6 @@ export default function Projects() {
   return (
     <main className="max-w-5xl mx-auto md:px-16 px-6 pb-[16vh]">
       <PageHeading
-        label="02 · SELECTED WORK"
         title="Projects"
         description="I reimplement recent ML papers from scratch to understand them end to end, then build real systems on top. These are the ones I'm most proud of — many are open-source with live demos."
       />

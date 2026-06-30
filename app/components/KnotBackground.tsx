@@ -174,11 +174,17 @@ class KnotScene {
       this.idleBase = 0;
       this.frame();
     } else {
-      this._loop = () => {
-        this.frame();
+      // Cap the background to ~30fps. It's decorative, so halving its frame rate
+      // frees the main thread for smoother scrolling at little visible cost.
+      const minInterval = 1000 / 30;
+      this._lastFrame = 0;
+      this._loop = (ts: number) => {
         this._raf = requestAnimationFrame(this._loop);
+        if (ts - this._lastFrame < minInterval) return;
+        this._lastFrame = ts;
+        this.frame();
       };
-      this._loop();
+      this._raf = requestAnimationFrame(this._loop);
     }
   }
 
@@ -197,7 +203,7 @@ class KnotScene {
   resize() {
     const w = this.panel.clientWidth,
       h = this.panel.clientHeight,
-      dpr = Math.min(2, window.devicePixelRatio || 1);
+      dpr = Math.min(1.5, window.devicePixelRatio || 1);
     if (
       this.canvas.width !== Math.round(w * dpr) ||
       this.canvas.height !== Math.round(h * dpr)
@@ -337,12 +343,19 @@ export default function KnotBackground() {
     <div
       id="knotPanel"
       className="fixed inset-0 z-0 overflow-hidden"
-      style={{ background: "#ffffff" }}
+      // own compositor layer + paint containment, so the canvas repaint stays
+      // isolated from the scrolling content above it
+      style={{
+        background: "#ffffff",
+        contain: "strict",
+        transform: "translateZ(0)",
+      }}
       aria-hidden="true"
     >
       <canvas
         id="knotCanvas"
         className="absolute inset-0 block h-full w-full"
+        style={{ willChange: "transform", transform: "translateZ(0)" }}
       />
     </div>
   );

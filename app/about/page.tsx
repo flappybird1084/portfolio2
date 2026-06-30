@@ -14,7 +14,6 @@ export default function About() {
       {/* INTRO — wide two-column: big statement + sticky info aside */}
       <section className="grid lg:grid-cols-[1.5fr_1fr] grid-cols-1 gap-x-16 gap-y-12 lg:mb-32 mb-20">
         <div className="order-2 lg:order-none">
-          <div className="section-label mb-4">ABOUT</div>
           <h1 className="font-display font-black tracking-tight text-paper text-[clamp(40px,6vw,72px)] leading-[0.95] mb-8">
             I&apos;m Rian. I build the future, from the papers up.
           </h1>
@@ -79,7 +78,7 @@ export default function About() {
 
       {/* FOCUS */}
       <section className="lg:mb-32 mb-20">
-        <SectionHeading number="01 · FOCUS" title="What I work on" />
+        <SectionHeading title="What I work on" />
         <div className="grid lg:grid-cols-3 grid-cols-1 gap-7">
           {focus.map((f) => (
             <div key={f.index} className="panel p-8 flex flex-col">
@@ -99,7 +98,7 @@ export default function About() {
 
       {/* EXPERIENCE */}
       <section className="lg:mb-32 mb-20">
-        <SectionHeading number="02 · EXPERIENCE" title="Work Experience" />
+        <SectionHeading title="Work Experience" />
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-12 gap-y-12">
           {experience.map((job, i) => (
             <div key={`${job.role}-${job.org}`} className="flex items-start gap-x-5">
@@ -125,7 +124,7 @@ export default function About() {
 
       {/* EDUCATION */}
       <section>
-        <SectionHeading number="03 · EDUCATION" title="Education" />
+        <SectionHeading title="Education" />
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-7">
           {education.map((ed) => (
             <div key={ed.school} className="panel p-8">

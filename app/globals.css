@@ -25,12 +25,11 @@ body {
 }
 
 @layer components {
-  /* Frosted panel used for content sections — light, sterile card on white */
+  /* Content-section card. Near-opaque (no backdrop blur) so scrolling stays smooth —
+     a blurred backdrop forces an expensive re-sample of the moving canvas every frame. */
   .panel {
     @apply relative border border-black/[0.08] rounded-[3px];
-    background: rgba(248, 249, 251, 0.7);
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
+    background: rgba(249, 250, 252, 0.93);
   }
 
   .section-label {
