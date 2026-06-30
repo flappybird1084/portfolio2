@@ -23,8 +23,9 @@ What actually moved the needle across **five full codebase rewrites and 30+ note
 wasn't any single discovery. It was the slow realization that each "minor detail" I'd
 waved off was actually load-bearing. A few that cost me real time:
 
-- I thought `scaled_dot_product_attention` took the head dimension as the *third* axis. It
-  doesn't — it wants `(B, H, L, head_dim)`. I'd had this subtly wrong for ages.
+- I had the axis order for `scaled_dot_product_attention` wrong. It wants
+  `(batch, num_heads, seq, head_dim)` — heads *before* the sequence — and I'd had this
+  subtly off for ages.
 - I didn't think positional embeddings on the image tokens mattered — I assumed the network
   could just memorize the layout. It can't, and adding them was a turning point.
 - I computed the loss in image space instead of the latent space the model actually
@@ -42,21 +43,23 @@ prompt = prompt + timestep_emb
 ```
 
 And the attention itself is "joint": image and prompt tokens are concatenated and attend to
-each other in a single pass. This is also where the head-dimension bug lived — the reshape
-has to land on `(B, H, L, head_dim)`, not `(B, L, H, head_dim)`:
+each other in a single pass. This is also where the head-dimension bug lived — SDPA expects
+`(batch, num_heads, seq, head_dim)`, so the reshape has to put the heads axis *before* the
+sequence, not after:
 
 ```python
-Q = torch.cat([image_q, prompt_q], dim=1)   # B, L, dim
+Q = torch.cat([image_q, prompt_q], dim=1)   # (batch, seq, dim)
 K = torch.cat([image_k, prompt_k], dim=1)
 V = torch.cat([image_v, prompt_v], dim=1)
 
-# SDPA wants (B, H, L, head_dim). Getting this transpose wrong
-# silently trains a worse model instead of throwing an error.
+# SDPA wants (batch, num_heads, seq, head_dim). Land the heads axis
+# before seq via transpose — get this wrong and it silently trains a
+# worse model instead of throwing an error.
 Q = Q.view(Q.size(0), Q.size(1), self.nhead, -1).transpose(1, 2)
 K = K.view(K.size(0), K.size(1), self.nhead, -1).transpose(1, 2)
 V = V.view(V.size(0), V.size(1), self.nhead, -1).transpose(1, 2)
 
-attn_out = F.scaled_dot_product_attention(Q, K, V)   # B, H, L, head_dim
+attn_out = F.scaled_dot_product_attention(Q, K, V)   # (batch, num_heads, seq, head_dim)
 ```
 
 ## How it actually trains
