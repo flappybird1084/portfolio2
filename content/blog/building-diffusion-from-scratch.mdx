@@ -1,0 +1,29 @@
+---
+title: "What I learned building latent diffusion five times"
+date: "2026-06-15"
+summary: "Eight months, five rewrites, and the data-pipeline bug that was quietly sabotaging every run."
+tags: ["diffusion", "pytorch", "from-scratch"]
+---
+
+I rebuilt a latent diffusion model from the paper up five times over eight months. Each
+attempt taught me something the last one couldn't, and the final version only trained
+stably once I stopped blaming the architecture and started blaming my data pipeline.
+
+## The thing nobody tells you
+
+Most diffusion tutorials hand you a clean dataset and a working VAE. The hard part isn't
+the rectified-flow objective or the MMDiT blocks — it's everything around them:
+
+- Latents that aren't normalized the way you think they are
+- A sampler that silently disagrees with your training schedule
+- Augmentations that look fine but quietly shift the distribution
+
+## Where it finally clicked
+
+The fifth iteration trains stably and samples 256px images from a checkpoint I trained
+myself. The difference wasn't a smarter model — it was rebuilding the data pipeline so the
+latents actually matched what the model expected at sample time.
+
+> If your loss looks fine but your samples are garbage, look at your data before your model.
+
+More write-ups coming as I clean up the training notes.

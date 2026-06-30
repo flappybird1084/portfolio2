@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #16181d;
+  font-family: var(--font-mono), monospace;
+}
+
+::selection {
+  background: #2f6bff;
+  color: #fff;
+}
+
+@layer components {
+  /* Frosted panel used for content sections — light, sterile card on white */
+  .panel {
+    @apply relative border border-black/[0.08] rounded-[3px];
+    background: rgba(248, 249, 251, 0.7);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+  }
+
+  .section-label {
+    @apply text-[12px] font-bold tracking-[0.2em] text-accent;
+  }
+
+  .chip {
+    @apply font-mono text-[11px] font-bold text-muted border border-black/[0.12] rounded-[3px] px-[10px] py-[5px] tracking-[0.03em] whitespace-nowrap;
+  }
+
+  .nav-link {
+    @apply text-muted hover:text-accent transition-colors duration-300 text-[13px] font-bold tracking-[0.12em];
+  }
+}
+
+/* Markdown / blog prose tuned for the light palette */
+.prose-knot {
+  @apply prose max-w-none;
+  --tw-prose-body: #3b424d;
+  --tw-prose-headings: #16181d;
+  --tw-prose-links: #2f6bff;
+  --tw-prose-bold: #16181d;
+  --tw-prose-quotes: #5b6470;
+  --tw-prose-quote-borders: #2f6bff;
+  --tw-prose-bullets: #9aa2ad;
+  --tw-prose-hr: rgba(0, 0, 0, 0.1);
+  --tw-prose-code: #1b4fd6;
+}
+
+.prose-knot :where(h1, h2, h3) {
+  font-family: var(--font-archivo), sans-serif;
+}

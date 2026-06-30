@@ -1,0 +1,94 @@
+import Image from "next/image";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Slide } from "../../components/Slide";
+import { projects } from "../../lib/data";
+
+type Params = { params: Promise<{ project: string }> };
+
+export function generateStaticParams() {
+  return projects.map((p) => ({ project: p.slug }));
+}
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { project: slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
+  if (!project) return {};
+  return {
+    title: project.name,
+    description: project.tagline,
+    alternates: { canonical: `/projects/${project.slug}` },
+  };
+}
+
+export default async function ProjectPage({ params }: Params) {
+  const { project: slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
+  if (!project) notFound();
+
+  return (
+    <main className="max-w-content mx-auto px-8 pb-[16vh]">
+      <Slide>
+        <Link
+          href="/projects"
+          className="inline-block mb-8 text-[12px] font-bold tracking-[0.12em] text-muted hover:text-accent transition-colors"
+        >
+          ← ALL PROJECTS
+        </Link>
+
+        <div className="flex items-center gap-3 mb-4">
+          <span className="text-[12px] font-bold text-faint">{project.tech}</span>
+          {project.award && (
+            <span className="flex items-center gap-1.5 rounded-full bg-accent text-ink text-[11px] font-bold px-2.5 py-1">
+              <span aria-hidden="true">★</span>
+              {project.award}
+            </span>
+          )}
+        </div>
+
+        <h1 className="font-display font-black tracking-tight text-paper sm:text-5xl text-3xl leading-[0.95] mb-6">
+          {project.name}
+        </h1>
+
+        {project.image && (
+          <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg border border-black/10 bg-[#eef0f4] mb-8">
+            <Image
+              src={project.image}
+              alt={project.imageAlt ?? project.name}
+              fill
+              sizes="(max-width: 768px) 100vw, 680px"
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
+
+        <p className="text-[16px] leading-relaxed text-soft mb-8">
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-x-6 gap-y-3 text-[12px] font-bold tracking-[0.12em]">
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:text-accent-bright transition-colors"
+          >
+            GITHUB ↗
+          </a>
+          {project.liveDemo && (
+            <a
+              href={project.liveDemo.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:text-accent-bright transition-colors"
+            >
+              ▶ {project.liveDemo.label.toUpperCase()} ↗
+            </a>
+          )}
+        </div>
+      </Slide>
+    </main>
+  );
+}
