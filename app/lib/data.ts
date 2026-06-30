@@ -116,6 +116,18 @@ export const projects: Project[] = [
     liveDemo: { label: "Live demo", href: "https://huggingface.co/spaces/flappybird1084/chatbot" },
   },
   {
+    slug: "neurozip",
+    name: "NeuroZip",
+    tagline: "3rd place at the QBI Hackathon: EEG compression you can search by text.",
+    description:
+      "A task-aware neural codec for brain recordings. Instead of compressing EEG to preserve the waveform, it compresses to preserve meaning: what the person was looking at. At 144x compression the result is still searchable by free text. Built with Avinash Senthil; won 3rd place, $1,000, and $10,000 in grants at the QBI Hackathon 2026 at UCSF.",
+    tech: "PyTorch · CLIP",
+    href: "https://github.com/xerneas3318/NeuroZip/tree/criticism-2",
+    image: "/img/neurozip/cover.webp",
+    imageAlt: "NeuroZip, QBI Hackathon 3rd place winner",
+    award: "3rd · QBI Hackathon",
+  },
+  {
     slug: "parameter-golf",
     name: "OpenAI Parameter Golf",
     tagline: "Best language model under 16 MB: 1.5126 bits/byte in 600 seconds.",
