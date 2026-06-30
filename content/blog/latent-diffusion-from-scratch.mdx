@@ -1,18 +1,18 @@
 ---
 title: "Eight months, five rewrites: building a diffusion model by hand"
 date: "2026-06-22"
-summary: "A Qwen-Image-style MMDiT rectified-flow image generator, built from scratch over eight months — and the 'minor details' that turned out to be everything."
+summary: "A Qwen-Image-style MMDiT rectified-flow image generator, built from scratch over eight months, and the 'minor details' that turned out to be everything."
 tags: ["diffusion", "pytorch", "rectified-flow", "from-scratch"]
 ---
 
 A few weeks ago I put the finishing touches on one of my longest projects yet: a
 Qwen-Image-style MMDiT rectified-flow image generator, written by hand. I started it back
 in November 2025, and the whole point was to build the thing myself to actually learn how
-it works — not to wire together someone else's pipeline.
+it works, not to wire together someone else's pipeline.
 
 ## Where I started (with no idea what I was doing)
 
-Going in, all I really had was some limited knowledge of GANs and encoder–decoder
+Going in, all I really had was some limited knowledge of GANs and encoder-decoder
 networks. So my first attempts looked like it: huge VAEs, and CLIP latent vectors thrown
 straight into transformers with no understanding of patch embeddings or efficient
 transformer design. It did not work, and for a long time I couldn't tell you why.
@@ -24,9 +24,9 @@ wasn't any single discovery. It was the slow realization that each "minor detail
 waved off was actually load-bearing. A few that cost me real time:
 
 - I had the axis order for `scaled_dot_product_attention` wrong. It wants
-  `(batch, num_heads, seq, head_dim)` — heads *before* the sequence — and I'd had this
-  subtly off for ages.
-- I didn't think positional embeddings on the image tokens mattered — I assumed the network
+  `(batch, num_heads, seq, head_dim)`, with the heads axis *before* the sequence, and I'd
+  had this subtly off for ages.
+- I didn't think positional embeddings on the image tokens mattered. I assumed the network
   could just memorize the layout. It can't, and adding them was a turning point.
 - I computed the loss in image space instead of the latent space the model actually
   operates in.
@@ -43,7 +43,7 @@ prompt = prompt + timestep_emb
 ```
 
 And the attention itself is "joint": image and prompt tokens are concatenated and attend to
-each other in a single pass. This is also where the head-dimension bug lived — SDPA expects
+each other in a single pass. This is also where the head-dimension bug lived. SDPA expects
 `(batch, num_heads, seq, head_dim)`, so the reshape has to put the heads axis *before* the
 sequence, not after:
 
@@ -53,7 +53,7 @@ K = torch.cat([image_k, prompt_k], dim=1)
 V = torch.cat([image_v, prompt_v], dim=1)
 
 # SDPA wants (batch, num_heads, seq, head_dim). Land the heads axis
-# before seq via transpose — get this wrong and it silently trains a
+# before seq via transpose. Get this wrong and it silently trains a
 # worse model instead of throwing an error.
 Q = Q.view(Q.size(0), Q.size(1), self.nhead, -1).transpose(1, 2)
 K = K.view(K.size(0), K.size(1), self.nhead, -1).transpose(1, 2)
@@ -67,7 +67,7 @@ attn_out = F.scaled_dot_product_attention(Q, K, V)   # (batch, num_heads, seq, h
 The denoising never touches pixels. Images are compressed with a frozen VAE into
 `(4, 32, 32)` latents and patchified into 256 tokens; prompts are embedded with frozen
 CLIP. Training is **rectified flow** (flow matching): sample a time `t`, walk a straight
-line between noise and data, and regress the model's velocity prediction to `x1 − x0` — all
+line between noise and data, and regress the model's velocity prediction to `x1 − x0`, all
 in latent space, which was the fix for that third bug.
 
 ```python
@@ -83,10 +83,10 @@ decode once through the VAE at the end.
 ## Was it an ordeal?
 
 Honestly, no. It's tempting to frame eight months of rewrites as a grind, but I loved every
-step — especially the moments when I could *see* a fix land with my own eyes, in the loss
+step, especially the moments when I could *see* a fix land with my own eyes, in the loss
 curve or in a reverse-diffusion sample. (For full disclosure: I used Claude to turn my
-handwritten notebooks into clean training scripts, but the original code is all hand-written
-— the notebook history is in the repo if you want to check.)
+handwritten notebooks into clean training scripts, but the original code is all hand-written,
+and the notebook history is in the repo if you want to check.)
 
 Up next: JEPA world models.
 

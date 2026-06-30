@@ -127,7 +127,7 @@ class KnotScene {
     window.addEventListener("scroll", this._onScroll, { passive: true });
 
     // The knot sits behind the content layer, so listen on window (not the panel) and
-    // hint that the page is draggable. Mouse/pen only — touch is left for scrolling.
+    // hint that the page is draggable. Mouse/pen only; touch is left for scrolling.
     const INTERACTIVE = 'a, button, input, textarea, select, label, [role="button"]';
     document.body.style.cursor = "grab";
     this._onPointerDown = (e: PointerEvent) => {

@@ -52,7 +52,7 @@ export default function Blog() {
             ))}
           </div>
         ) : (
-          <p className="text-muted text-[15px]">No posts yet — check back soon.</p>
+          <p className="text-muted text-[15px]">No posts yet. Check back soon.</p>
         )}
       </Slide>
     </main>

@@ -118,7 +118,7 @@ export const projects: Project[] = [
   {
     slug: "parameter-golf",
     name: "OpenAI Parameter Golf",
-    tagline: "Best language model under 16 MB — 1.5126 bits/byte in 600 seconds.",
+    tagline: "Best language model under 16 MB: 1.5126 bits/byte in 600 seconds.",
     description:
       "OpenAI's challenge to train the best language model under 16 MB. Mine reached 1.5126 bits/byte in a 600-second window on a single A5000.",
     tech: "PyTorch",

@@ -28,7 +28,7 @@ export default async function PostPage({ params }: Params) {
   if (!post) notFound();
 
   return (
-    <main className="max-w-3xl mx-auto px-8 pb-[16vh]">
+    <main className="max-w-4xl mx-auto px-8 pb-[16vh]">
       <Slide>
         <Link
           href="/blog"

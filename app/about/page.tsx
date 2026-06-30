@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <main className="max-w-6xl mx-auto md:px-16 px-6 lg:mt-20 mt-12 pb-32">
-      {/* INTRO — wide two-column: big statement + sticky info aside */}
+      {/* INTRO - wide two-column: big statement + sticky info aside */}
       <section className="grid lg:grid-cols-[1.5fr_1fr] grid-cols-1 gap-x-16 gap-y-12 lg:mb-32 mb-20">
         <div className="order-2 lg:order-none glass-soft p-6 md:p-8">
           <h1 className="font-display font-black tracking-tight text-paper text-[clamp(40px,6vw,72px)] leading-[0.95] mb-8">

@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <main className="max-w-6xl mx-auto md:px-16 px-6 lg:mt-20 mt-12 pb-32">
-      {/* HERO — big, left-aligned, knot reads through on the right */}
+      {/* HERO - big, left-aligned, knot reads through on the right */}
       <section className="min-h-[78vh] flex flex-col justify-center">
         <Slide>
           <div className="max-w-4xl">
@@ -29,7 +29,7 @@ export default function Home() {
         </Slide>
       </section>
 
-      {/* SELECTED WORK — two featured projects */}
+      {/* SELECTED WORK - two featured projects */}
       <section className="mt-32">
         <SectionHeading
           title="Selected Work"
@@ -42,7 +42,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WORK EXPERIENCE — two-column timeline grid */}
+      {/* WORK EXPERIENCE - two-column timeline grid */}
       <section className="mt-32">
         <SectionHeading title="Work Experience" />
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-12 gap-y-12">
