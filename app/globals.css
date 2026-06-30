@@ -32,6 +32,15 @@ body {
     background: rgba(249, 250, 252, 0.93);
   }
 
+  /* Glassy grayish surface for reading content (blog) — keeps text legible while
+     the knot stays faintly visible behind a soft blur. */
+  .glass {
+    @apply relative border border-black/[0.07] rounded-lg;
+    background: rgba(237, 239, 243, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
   .section-label {
     @apply text-[12px] font-bold tracking-[0.2em] text-accent;
   }

@@ -37,16 +37,18 @@ export default async function PostPage({ params }: Params) {
           ← ALL POSTS
         </Link>
 
-        <div className="text-[12px] font-bold text-faint mb-3">
-          {formatDate(post.date)}
-        </div>
-        <h1 className="font-display font-black tracking-tight text-paper sm:text-5xl text-3xl leading-[0.95] mb-8">
-          {post.title}
-        </h1>
+        <div className="glass md:p-10 p-6">
+          <div className="text-[12px] font-bold text-faint mb-3">
+            {formatDate(post.date)}
+          </div>
+          <h1 className="font-display font-black tracking-tight text-paper sm:text-5xl text-3xl leading-[0.95] mb-8">
+            {post.title}
+          </h1>
 
-        <article className="prose-knot">
-          <MDXRemote source={post.content} />
-        </article>
+          <article className="prose-knot">
+            <MDXRemote source={post.content} />
+          </article>
+        </div>
       </Slide>
     </main>
   );

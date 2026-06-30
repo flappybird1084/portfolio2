@@ -23,12 +23,12 @@ export default function Blog() {
 
       <Slide delay={0.1}>
         {posts.length > 0 ? (
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-5">
             {posts.map((post) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group py-6 border-t border-black/[0.08] hover:translate-x-2 transition-transform"
+                className="group glass p-7 hover:border-black/20 transition-colors"
               >
                 <div className="text-[12px] font-bold text-faint mb-2">
                   {formatDate(post.date)}
