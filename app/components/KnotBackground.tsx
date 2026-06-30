@@ -174,9 +174,8 @@ class KnotScene {
       this.idleBase = 0;
       this.frame();
     } else {
-      // Cap the background to ~30fps. It's decorative, so halving its frame rate
-      // frees the main thread for smoother scrolling at little visible cost.
-      const minInterval = 1000 / 30;
+      // Cap the background to ~60fps.
+      const minInterval = 1000 / 60;
       this._lastFrame = 0;
       this._loop = (ts: number) => {
         this._raf = requestAnimationFrame(this._loop);
