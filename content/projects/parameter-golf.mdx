@@ -1,0 +1,5 @@
+Parameter Golf is OpenAI's Model Craft Challenge: train the best language model that fits in a 16 MB artifact, evaluated by how well it compresses the FineWeb validation set, measured tokenizer-agnostically in bits per byte. It is essentially an L(N) scaling-law problem: get the lowest loss out of a fixed parameter budget, unconstrained by data or compute.
+
+My entry reached 1.5126 bits per byte in a 600-second training window on a single A5000. Most of the work is in the compression and training tricks that let a tiny model punch above its size: aggressive low-precision quantization and quantization-aware training, parameter tying, and a tokenizer and data pipeline tuned for the budget.
+
+It was a great forcing function for thinking about where a model actually spends its bits, and how much of a network you can throw away before the loss notices.

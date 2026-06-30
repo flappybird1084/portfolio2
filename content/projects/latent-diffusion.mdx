@@ -1,0 +1,11 @@
+A from-scratch text-to-image diffusion model trained with rectified flow (flow matching) in a frozen VAE latent space, conditioned on CLIP text embeddings through a stack of joint-attention transformer blocks. The architecture is MMDiT-style, written from the paper up.
+
+## How it works
+
+The pipeline never touches pixels during denoising; everything happens in latent space. Images are compressed with a frozen `sd-vae-ft-mse` VAE into `(4, 32, 32)` latents and patchified into 256 tokens of dim 16. Prompts are embedded with frozen CLIP. A stack of joint-attention blocks predicts the rectified-flow velocity: each block concatenates image and prompt tokens and runs a single scaled-dot-product attention over them, with sinusoidal timestep embeddings and learned positional embeddings added in.
+
+Training samples a time `t`, forms `x_t = (1 - t) * x0 + t * x1`, predicts the velocity, and regresses to `v = x1 - x0` with MSE. Classifier-free guidance is learned by dropping the prompt 10 percent of the time. Sampling Euler-integrates the velocity field in latent space with guidance, then decodes once through the VAE.
+
+## The long version
+
+This is the fifth iteration over eight months. The earlier attempts would not train stably until I rebuilt the data pipeline so the latents matched what the model expected at sample time. I wrote up the full story, including the bugs that cost me weeks, in [a blog post](/blog/latent-diffusion-from-scratch). The live demo samples 256px images from a checkpoint I trained myself.

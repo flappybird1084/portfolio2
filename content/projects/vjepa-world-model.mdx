@@ -1,0 +1,3 @@
+A self-supervised video world model in the V-JEPA family, hand-written from scratch in PyTorch. JEPA models learn by predicting the representation of masked parts of a video in latent space, rather than reconstructing pixels, which is what makes them powerful but also prone to representation collapse if the details are wrong.
+
+I trained it on the Something-Something-v2 dataset. Training was stable: no representation collapse, with the loss converging cleanly. I did not run downstream evaluation, so I am not claiming benchmark numbers. The aim was to reproduce the approach faithfully and understand why the architecture avoids collapse by building it rather than reading about it.
