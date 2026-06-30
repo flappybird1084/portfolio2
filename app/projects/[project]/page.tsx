@@ -102,31 +102,10 @@ export default async function ProjectPage({ params }: Params) {
             </article>
           </div>
         ) : (
-          <p className="text-[16px] leading-relaxed text-soft mb-8">
+          <p className="text-[16px] leading-relaxed text-soft">
             {project.description}
           </p>
         )}
-
-        <div className="flex flex-wrap gap-x-6 gap-y-3 text-[12px] font-bold tracking-[0.12em]">
-          <a
-            href={project.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent hover:text-accent-bright transition-colors"
-          >
-            GITHUB ↗
-          </a>
-          {project.liveDemo && (
-            <a
-              href={project.liveDemo.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-accent hover:text-accent-bright transition-colors"
-            >
-              ▶ {project.liveDemo.label.toUpperCase()} ↗
-            </a>
-          )}
-        </div>
       </Slide>
     </main>
   );
