@@ -57,9 +57,30 @@ export default async function ProjectPage({ params }: Params) {
           )}
         </div>
 
-        <h1 className="font-display font-black tracking-tight text-paper sm:text-5xl text-3xl leading-[0.95] mb-6">
+        <h1 className="font-display font-black tracking-tight text-paper sm:text-5xl text-3xl leading-[0.95] mb-5">
           {project.name}
         </h1>
+
+        <div className="flex flex-wrap gap-x-6 gap-y-3 text-[12px] font-bold tracking-[0.12em] mb-8">
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:text-accent-bright transition-colors"
+          >
+            GITHUB ↗
+          </a>
+          {project.liveDemo && (
+            <a
+              href={project.liveDemo.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:text-accent-bright transition-colors"
+            >
+              ▶ {project.liveDemo.label.toUpperCase()} ↗
+            </a>
+          )}
+        </div>
 
         {project.image && (
           <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg border border-black/10 bg-[#eef0f4] mb-8">

@@ -4,10 +4,15 @@ import { Project } from "@/app/lib/data";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className="group panel flex flex-col overflow-hidden hover:border-black/20 transition-colors duration-200"
-    >
+    <div className="group panel relative flex flex-col overflow-hidden hover:border-black/20 transition-colors duration-200">
+      {/* Stretched link: the whole card navigates to the detail page, but it's a
+          sibling (not a parent) so the GitHub link below can sit above it. */}
+      <Link
+        href={`/projects/${project.slug}`}
+        aria-label={project.name}
+        className="absolute inset-0 z-10"
+      />
+
       <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#eef0f4] border-b border-black/[0.08]">
         {project.image ? (
           <Image
@@ -25,7 +30,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           </div>
         )}
         {project.award && (
-          <span className="absolute top-3 left-3 z-10 flex items-center gap-1.5 rounded-full bg-accent text-ink text-[11px] font-bold px-2.5 py-1 shadow-lg shadow-black/40">
+          <span className="absolute top-3 left-3 z-10 flex items-center gap-1.5 rounded-full bg-accent text-white text-[11px] font-bold px-2.5 py-1 shadow-lg shadow-black/40">
             <span aria-hidden="true">★</span>
             {project.award}
           </span>
@@ -41,7 +46,15 @@ export default function ProjectCard({ project }: { project: Project }) {
           </span>
         </div>
         <p className="text-[14px] leading-relaxed text-muted">{project.tagline}</p>
+        <a
+          href={project.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative z-20 mt-4 inline-flex w-fit items-center gap-1.5 text-[11px] font-bold tracking-[0.1em] text-accent hover:text-accent-bright transition-colors"
+        >
+          GITHUB ↗
+        </a>
       </div>
-    </Link>
+    </div>
   );
 }

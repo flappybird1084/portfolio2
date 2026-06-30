@@ -121,7 +121,7 @@ export const projects: Project[] = [
     tagline: "3rd place at the QBI Hackathon: EEG compression you can search by text.",
     description:
       "A task-aware neural codec for brain recordings. Instead of compressing EEG to preserve the waveform, it compresses to preserve meaning: what the person was looking at. At 144x compression the result is still searchable by free text. Built with Avinash Senthil; won 3rd place, $1,000, and $10,000 in grants at the QBI Hackathon 2026 at UCSF.",
-    tech: "PyTorch · CLIP",
+    tech: "PyTorch",
     href: "https://github.com/xerneas3318/NeuroZip/tree/criticism-2",
     image: "/img/neurozip/cover.webp",
     imageAlt: "NeuroZip, QBI Hackathon 3rd place winner",
@@ -167,7 +167,7 @@ export const projects: Project[] = [
     tagline: "Multi-camera theft detection with YOLO triggers and VLM threat scoring.",
     description:
       "Built for Stratford Preparatory to deter and detect theft across multiple cameras. YOLO triggers recording on people; a vision-language model scores each clip for threats and makes them searchable in plain language. Runs entirely on local hardware, no cloud.",
-    tech: "Flask · YOLO",
+    tech: "Flask · YOLO · llama.cpp",
     href: "https://github.com/flappybird1084/vesta",
     image: "/img/vesta.png",
     imageAlt: "Vesta recordings library with AI threat scores",
