@@ -13,7 +13,7 @@ export default function About() {
     <main className="max-w-6xl mx-auto md:px-16 px-6 lg:mt-20 mt-12 pb-32">
       {/* INTRO — wide two-column: big statement + sticky info aside */}
       <section className="grid lg:grid-cols-[1.5fr_1fr] grid-cols-1 gap-x-16 gap-y-12 lg:mb-32 mb-20">
-        <div className="order-2 lg:order-none">
+        <div className="order-2 lg:order-none glass-soft p-6 md:p-8">
           <h1 className="font-display font-black tracking-tight text-paper text-[clamp(40px,6vw,72px)] leading-[0.95] mb-8">
             I&apos;m Rian. I build the future, from the papers up.
           </h1>
@@ -105,7 +105,7 @@ export default function About() {
               <div className="grid place-items-center min-h-[64px] min-w-[64px] panel font-display font-black text-accent text-xl">
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <div className="flex flex-col items-start pt-1">
+              <div className="flex flex-col items-start glass-soft p-4">
                 <h3 className="font-display font-bold text-paper text-xl">
                   {job.role}
                 </h3>

@@ -51,7 +51,7 @@ export default function Home() {
               <div className="grid place-items-center min-h-[64px] min-w-[64px] panel font-display font-black text-accent text-xl">
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <div className="flex flex-col items-start pt-1">
+              <div className="flex flex-col items-start glass-soft p-4">
                 <h3 className="font-display font-bold text-paper text-xl">
                   {job.role}
                 </h3>

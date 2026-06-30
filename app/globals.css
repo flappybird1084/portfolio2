@@ -41,6 +41,15 @@ body {
     -webkit-backdrop-filter: blur(8px);
   }
 
+  /* Small, subtle backdrop for bare text over the knot (home/about). Lightly
+     translucent with a tiny blur so it lifts readability without hiding the knot. */
+  .glass-soft {
+    @apply relative border border-black/[0.05] rounded-lg;
+    background: rgba(249, 250, 251, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
   .section-label {
     @apply text-[12px] font-bold tracking-[0.2em] text-accent;
   }
